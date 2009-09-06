@@ -5,21 +5,13 @@ class UserInterface
     cli_args_parser.parse!(command_line_args)
     
     unless @size
-      puts o
+      puts cli_args_parser
       exit
     end
   end
 
   def start
-    print_welcome_message
-    print_help
-    print_command_prompt
-
-    until command =~ /q/
-      print_command_prompt
-    end
-
-    print_goodbye_message
+    # Immediately quit: no other functionality required yet.
     print_revealed_board
   end
 
@@ -41,32 +33,7 @@ class UserInterface
     end
   end
 
-  def print_welcome_message
-    puts "Welcome to minesweeper"
-  end
-
-  def print_goodbye_message
-    puts "Goodbye!"
-    puts
-  end
-  
   def print_revealed_board
     puts "TODO"
-  end
-
-  def print_help
-    puts
-    puts "  Commands:"
-    puts "  q - quit the game"
-    puts
-  end
-
-  def print_command_prompt
-    print ">"
-    STDOUT.flush
-  end
-
-  def command
-    STDIN.gets.strip
   end
 end

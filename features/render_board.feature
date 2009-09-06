@@ -8,8 +8,6 @@ Feature: Render Board
     When the game is over
     Then I should see the following output
       """
-      Goodbye!
-
       .....
       .....
       .....
@@ -23,8 +21,6 @@ Feature: Render Board
     When the game is over
     Then I should see the following output
       """
-      Goodbye!
-
       1*1
       111
       """
@@ -36,8 +32,6 @@ Feature: Render Board
      When the game is over
      Then I should see the following output
        """
-       Goodbye!
-
        ............
        ............
        ...111......
@@ -54,8 +48,6 @@ Feature: Render Board
     When the game is over
     Then I should see the following output
       """
-      Goodbye!
-
       ............
       ............
       ...111......
@@ -73,8 +65,6 @@ Feature: Render Board
     When the game is over
     Then I should see the following output
       """
-      Goodbye!
-
       ............
       .....111....
       ...112*1....

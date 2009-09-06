@@ -7,8 +7,7 @@ Given /^I have a (\d+) x (\d+) gameboard with (?:a )?mines? at the following co\
 end
 
 When /^the game is over$/ do
-  read_to_command_prompt
-  @game.puts "q"
+  # For now, the game is over immediately
 end
 
 Then /^I should see the following output$/ do |expected_output|
