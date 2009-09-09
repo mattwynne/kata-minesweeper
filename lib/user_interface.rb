@@ -49,11 +49,7 @@ class UserInterface
       '*'
     else
       count = count_mines_near(x,y)
-      if count > 0
-        count
-      else
-        '.'
-      end
+      count > 0 ? count : '.'
     end
   end
   
@@ -65,7 +61,7 @@ class UserInterface
     count = 0
     ((x-1)..(x+1)).each do |x2|
       ((y-1)..(y+1)).each do |y2|
-        count = count + 1 if mine_at(x2, y2)
+        count += 1 if mine_at(x2, y2)
       end
     end
     return count
