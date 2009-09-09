@@ -13,24 +13,66 @@ task :default => :features do
   system("flog #{File.dirname(__FILE__)}/lib/*.rb")
 end
 
+task :start_dojo do
+end
+
 task :dojo do
-  print "Enter your name: "
-  name = STDIN.gets
-  system("git checkout iteration-1")
-  system("git branch -D #{name}")
-  system("git checkout -b #{name}")
+  def run_cukes
+    system("cucumber features")
+
+    unless $?.exitstatus == 0
+      puts
+      puts "FAIL! Better fix that. Hit [ENTER] to run the tests again when you're ready..."
+      STDIN.gets
+    end
+  end
+
+  def init(name)
+    system("git checkout iteration-1")
+    exit $?.exitstatus unless ($?.exitstatus == 0)
+    system("git branch -D #{name}")
+    system("git checkout -b #{name}")
+  end
+
+  def get_name
+    print "Enter your name: "
+    STDIN.gets
+  end
+
+  def success?
+    $?.exitstatus == 0
+  end
+
+  init(get_name)
 
   iteration = 1
   until iteration > 5
-    system("cucumber features")
-    unless $?.exitstatus == 0
-      puts "FAIL! Better fix that. Hit a key to run the tests again when you're ready..."
-      STDIN.gets
-    end
-    if $?.exitstatus == 0
-      iteration += 1
+    run_cukes
+
+    if success?
       if iteration <= 5
-        puts "WIN! Ready for the next iteration? Here we go..."
+        system("git add .")
+        system(%Q{git commit -m "iteration #{iteration} tests passing."})
+        puts
+        puts
+        puts "WIN!"
+
+        puts "Perhaps you would care for a spot of refactoring at this point?"
+
+        go_next = false
+        until go_next
+          message = "Press [ENTER] to run the tests again (with refactoring tips)"
+          message << ", [SPACE ENTER] to move to the next iteration" if success?
+          puts message
+
+          go_next = (STDIN.gets == " \n")
+          system("rake")
+          go_next = go_next and success?
+        end
+        system(%Q{git commit -m "iteration #{iteration} refactored."})
+
+        # move to next iteration
+        iteration += 1
         system("git merge iteration-#{iteration}")
       else
         puts "EPIC WIN! Now to play the refactoring game..."
