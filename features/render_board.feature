@@ -25,3 +25,19 @@ Feature: Render Board
       111
 
       """
+
+  Scenario: Place Single Mine on large Gameboard
+     Given I have a 12 x 6 gameboard with a mine at the following co-ordinates:
+      | x | y |
+      | 5 | 4 |
+     When the game is over
+     Then I should see the following output
+       """
+       ............
+       ............
+       ...111......
+       ...1*1......
+       ...111......
+       ............
+
+       """
