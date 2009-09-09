@@ -3,6 +3,7 @@ require 'optparse'
 class UserInterface
   def initialize(command_line_args)
     cli_args_parser.parse!(command_line_args)
+    @mines ||= []
     
     unless @size
       puts cli_args_parser
@@ -44,16 +45,26 @@ class UserInterface
   end
   
   def board_character(x,y)
-    if @mines.nil? ||@mines.empty?
-      '.'
-    elsif mine_at(x,y)
+    if mine_at(x,y)
       '*'
-    else
+    elsif mine_near(x,y)
       '1'
+    else
+      '.'
     end
   end
   
   def mine_at(x,y)
     @mines.include?([x+1,y+1])
+  end
+  
+  def mine_near(x,y)
+    found = false
+    ((x-1)..(x+1)).each do |x2|
+      ((y-1)..(y+1)).each do |y2|
+        return true if mine_at(x2, y2)
+      end
+    end
+    return found
   end
 end
