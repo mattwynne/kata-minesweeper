@@ -1,4 +1,5 @@
 require 'optparse'
+require 'minesweeper'
 
 class UserInterface
   def initialize(command_line_args)
@@ -35,35 +36,12 @@ class UserInterface
   end
 
   def print_revealed_board
-    #puts "mines was: #{@mines.inspect}"
-    @size[1].to_i.times do |y|
-      @size[0].to_i.times do |x|
-        print board_character(x,y)
+    minesweeper = Minesweeper.new(@size, @mines)
+    minesweeper.width.times do |y|
+      minesweeper.height.times do |x|
+        print minesweeper.board_character(x,y)
       end
       puts
     end
-  end
-  
-  def board_character(x,y)
-    if mine_at(x,y)
-      '*'
-    else
-      count = count_mines_near(x,y)
-      count > 0 ? count : '.'
-    end
-  end
-  
-  def mine_at(x,y)
-    @mines.include?([x+1,y+1])
-  end
-  
-  def count_mines_near(x,y)
-    count = 0
-    ((x-1)..(x+1)).each do |x2|
-      ((y-1)..(y+1)).each do |y2|
-        count += 1 if mine_at(x2, y2)
-      end
-    end
-    return count
   end
 end

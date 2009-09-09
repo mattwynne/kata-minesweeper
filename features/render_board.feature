@@ -26,6 +26,18 @@ Feature: Render Board
 
       """
 
+  Scenario: Place Single Mine in the corner of a small Gameboard
+    Given I have a 3 x 2 gameboard with a mine at the following co-ordinates:
+      | x | y |
+      | 1 | 1 |
+    When the game is over
+    Then I should see the following output
+      """
+      *1.
+      11.
+
+      """
+
   Scenario: Place Single Mine on large Gameboard
      Given I have a 12 x 6 gameboard with a mine at the following co-ordinates:
       | x | y |
