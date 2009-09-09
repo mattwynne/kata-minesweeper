@@ -34,6 +34,26 @@ class UserInterface
   end
 
   def print_revealed_board
-    puts ".....\n.....\n....."
+    #puts "mines was: #{@mines.inspect}"
+    @size[1].to_i.times do |y|
+      @size[0].to_i.times do |x|
+        print board_character(x,y)
+      end
+      puts
+    end
+  end
+  
+  def board_character(x,y)
+    if @mines.nil? ||@mines.empty?
+      '.'
+    elsif mine_at(x,y)
+      '*'
+    else
+      '1'
+    end
+  end
+  
+  def mine_at(x,y)
+    @mines.include?([x+1,y+1])
   end
 end
