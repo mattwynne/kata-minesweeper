@@ -47,10 +47,13 @@ class UserInterface
   def board_character(x,y)
     if mine_at(x,y)
       '*'
-    elsif mine_near(x,y)
-      '1'
     else
-      '.'
+      count = count_mines_near(x,y)
+      if count > 0
+        count
+      else
+        '.'
+      end
     end
   end
   
@@ -58,13 +61,13 @@ class UserInterface
     @mines.include?([x+1,y+1])
   end
   
-  def mine_near(x,y)
-    found = false
+  def count_mines_near(x,y)
+    count = 0
     ((x-1)..(x+1)).each do |x2|
       ((y-1)..(y+1)).each do |y2|
-        return true if mine_at(x2, y2)
+        count = count + 1 if mine_at(x2, y2)
       end
     end
-    return found
+    return count
   end
 end
