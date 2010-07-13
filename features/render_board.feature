@@ -1,8 +1,8 @@
 Feature: Render Board
 
   Scenario: Empty minefield
-    When I run "bin/minesweeper --size=[5,3]"
-    Then I should see the following output
+    When I run "minesweeper --size=[5,3]"
+    Then it should pass with:
       """
       .....
       .....
@@ -11,8 +11,8 @@ Feature: Render Board
       """
 
   Scenario: Place Single Mine on small Gameboard
-    When I run "bin/minesweeper --size=[3,2] --mines=[[2,1]]"
-    Then I should see the following output
+    When I run "minesweeper --size=[3,2] --mines=[[2,1]]"
+    Then it should pass with:
       """
       1*1
       111
@@ -20,8 +20,8 @@ Feature: Render Board
       """
 
   Scenario: Place Single Mine on large Gameboard
-    When I run "bin/minesweeper --size=[12,6] --mines=[[5,4]]"
-    Then I should see the following output
+    When I run "minesweeper --size=[12,6] --mines=[[5,4]]"
+    Then it should pass with:
       """
       ............
       ............
@@ -33,8 +33,8 @@ Feature: Render Board
       """
 
   Scenario: Place Two Mines on large Gameboard
-    When I run "bin/minesweeper --size=[12,6] --mines=[[5,4],[7,5]]"
-    Then I should see the following output
+    When I run "minesweeper --size=[12,6] --mines=[[5,4],[7,5]]"
+    Then it should pass with:
       """
       ............
       ............
@@ -46,8 +46,8 @@ Feature: Render Board
       """
 
   Scenario: Place Three Mines on large Gameboard
-    When I run "bin/minesweeper --size=[12,6] --mines=[[5,4],[7,5],[7,3]]"
-    Then I should see the following output
+    When I run "minesweeper --size=[12,6] --mines=[[5,4],[7,5],[7,3]]"
+    Then it should pass with:
       """
       ............
       .....111....

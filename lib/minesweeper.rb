@@ -1,2 +1,1 @@
-require 'user_interface'
-# TODO!
+raise "TODO!"
