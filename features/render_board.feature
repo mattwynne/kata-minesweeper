@@ -1,11 +1,7 @@
 Feature: Render Board
-  In order to satisfy my burning curiosity
-  As a player
-  I want the entire board to be revealed to me when I quit the game
 
   Scenario: Empty minefield
-    Given I have a 5 x 3 gameboard
-    When the game is over
+    When I run "bin/minesweeper --size=[5,3]"
     Then I should see the following output
       """
       .....
@@ -15,10 +11,7 @@ Feature: Render Board
       """
 
   Scenario: Place Single Mine on small Gameboard
-    Given I have a 3 x 2 gameboard with a mine at the following co-ordinates:
-      | x | y |
-      | 2 | 1 |
-    When the game is over
+    When I run "bin/minesweeper --size=[3,2] --mines=[[2,1]]"
     Then I should see the following output
       """
       1*1
@@ -27,27 +20,20 @@ Feature: Render Board
       """
 
   Scenario: Place Single Mine on large Gameboard
-     Given I have a 12 x 6 gameboard with a mine at the following co-ordinates:
-      | x | y |
-      | 5 | 4 |
-     When the game is over
-     Then I should see the following output
-       """
-       ............
-       ............
-       ...111......
-       ...1*1......
-       ...111......
-       ............
+    When I run "bin/minesweeper --size=[12,6] --mines=[[5,4]]"
+    Then I should see the following output
+      """
+      ............
+      ............
+      ...111......
+      ...1*1......
+      ...111......
+      ............
 
-       """
+      """
 
   Scenario: Place Two Mines on large Gameboard
-    Given I have a 12 x 6 gameboard with mines at the following co-ordinates:
-      | x | y |
-      | 5 | 4 |
-      | 7 | 5 |
-    When the game is over
+    When I run "bin/minesweeper --size=[12,6] --mines=[[5,4],[7,5]]"
     Then I should see the following output
       """
       ............
@@ -60,12 +46,7 @@ Feature: Render Board
       """
 
   Scenario: Place Three Mines on large Gameboard
-    Given I have a 12 x 6 gameboard with mines at the following co-ordinates:
-      | x | y |
-      | 5 | 4 |
-      | 7 | 5 |
-      | 7 | 3 |
-    When the game is over
+    When I run "bin/minesweeper --size=[12,6] --mines=[[5,4],[7,5],[7,3]]"
     Then I should see the following output
       """
       ............
