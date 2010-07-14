@@ -2,7 +2,7 @@ Feature: Render Board
 
   Scenario: Empty minefield
     When I run "minesweeper --size 5x3"
-    Then it should pass with:
+    Then the output should contain exactly:
       """
       .....
       .....
